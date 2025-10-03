@@ -132,26 +132,16 @@
             btn.disabled = true;
             result.classList.remove('show');
             let count = 0;
-            const getMinMax = () => {
-                let min = parseInt(document.getElementById('min').value, 10);
-                let max = parseInt(document.getElementById('max').value, 10);
-                if (isNaN(min)) min = 0;
-                if (isNaN(max)) max = 100;
-                if (min > max) [min, max] = [max, min];
-                return { min, max };
-            };
+            // Always animate 21
             const interval = setInterval(() => {
-                const { min, max } = getMinMax();
-                result.textContent = Math.floor(Math.random() * (max - min + 1)) + min;
+                result.textContent = '21';
                 result.classList.add('animate');
                 setTimeout(() => result.classList.remove('animate'), 100);
                 count++;
                 if (count >= 15) {
                     clearInterval(interval);
                     setTimeout(() => {
-                        const { min, max } = getMinMax();
-                        const finalNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-                        result.textContent = finalNumber;
+                        result.textContent = '21';
                         result.classList.add('show');
                         createConfetti();
                         btn.disabled = false;
