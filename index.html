@@ -132,9 +132,16 @@
             btn.disabled = true;
             result.classList.remove('show');
             let count = 0;
-            // Always animate 21
+            const min = parseInt(document.getElementById('min').value, 10);
+            const max = parseInt(document.getElementById('max').value, 10);
             const interval = setInterval(() => {
-                result.textContent = '21';
+                // Show random numbers in the range, but not always 21
+                let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+                // Avoid showing 21 until the end
+                if (randomNum === 21 && count < 14) {
+                    randomNum = (randomNum === max ? min : randomNum + 1);
+                }
+                result.textContent = randomNum;
                 result.classList.add('animate');
                 setTimeout(() => result.classList.remove('animate'), 100);
                 count++;
